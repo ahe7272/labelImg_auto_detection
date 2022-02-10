@@ -6,11 +6,11 @@ import json
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 from libs.labelFile_custom import LabelFile
 
-def jsondet(source, onnx, classlist):
+def jsondet(source, onnx, class_path):
     net = cv2.dnn.readNet(onnx, config=None, framework=None)
     imgformat = ['jpg', 'png', 'psd', 'tiff', 'gif', 'jpeg']
-    with open(classlist) as f:
-        classes = f.read().split(', ')
+    with open(class_path) as f:
+        classes = f.read().split('\n')
     # rubbish.txt = ['Styrofoam_Box', 'Styrofoam_Buoy', 'Styrofoam_Piece', 'PET_Bottle', 'Glass', 'Metal', 'Plastic_Buoy', 'Plastic_Buoy_China', 'Plastic_ETC', 'Net', 'Rope'] 
     # ES.txt = ['Echi', 'Star'] 
     jsonoutput = {}
@@ -74,12 +74,12 @@ def jsondet(source, onnx, classlist):
 # jsondet("C:/Users/Administrator/Desktop/Detection/data/images/*", "C:/Users/Administrator/Desktop/Detection/nakdong.onnx", "C:/Users/Administrator/Desktop/Detection/data/classes/rubbish.txt")
 
 
-def xmldet(source, onnx, classlist):
+def xmldet(source, onnx, class_path):
     net = cv2.dnn.readNet(onnx, config=None, framework=None)
     xmlfile = LabelFile()
     imgformat = ['jpg', 'png', 'psd', 'tiff', 'gif', 'jpeg']
-    with open(classlist) as f:
-        classes = f.read().split(', ')
+    with open(class_path) as f:
+        classes = f.read().split('\n')
     # rubbish.txt = ['Styrofoam_Box', 'Styrofoam_Buoy', 'Styrofoam_Piece', 'PET_Bottle', 'Glass', 'Metal', 'Plastic_Buoy', 'Plastic_Buoy_China', 'Plastic_ETC', 'Net', 'Rope'] 
     # ES.txt = ['Echi', 'Star'] 
 
@@ -142,12 +142,12 @@ def xmldet(source, onnx, classlist):
 
 
 
-def yolodet(source, onnx, classlist):
+def yolodet(source, onnx, class_path):
     net = cv2.dnn.readNet(onnx, config=None, framework=None)
     yolofile = LabelFile()
     imgformat = ['jpg', 'png', 'psd', 'tiff', 'gif', 'jpeg']
-    with open(classlist) as f:
-        classes = f.read().split(', ')
+    with open(class_path) as f:
+        classes = f.read().split('\n')
     # rubbish.txt = ['Styrofoam_Box', 'Styrofoam_Buoy', 'Styrofoam_Piece', 'PET_Bottle', 'Glass', 'Metal', 'Plastic_Buoy', 'Plastic_Buoy_China', 'Plastic_ETC', 'Net', 'Rope'] 
     # ES.txt = ['Echi', 'Star'] 
 
@@ -204,6 +204,6 @@ def yolodet(source, onnx, classlist):
             shape["points"] = [round(centerX - width/2), round(centerY - height/2), round(centerX + width/2), round(centerY + height/2)]
             shape["difficult"] = False
             shapes.append(shape)
-        yolofile.save_yolo_format(filename, shapes, str(p), classes)
+        yolofile.save_yolo_format(filename, shapes, str(p), classes, class_path)
 
 # yolodet("C:/Users/Administrator/Desktop/Detection/data/images/*", "C:/Users/Administrator/Desktop/Detection/nakdong.onnx", "C:/Users/Administrator/Desktop/Detection/data/classes/rubbish.txt")

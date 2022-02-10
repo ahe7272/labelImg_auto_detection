@@ -1143,7 +1143,7 @@ class MainWindow(QMainWindow, WindowMixin):
         """
         return '[{} / {}]'.format(self.cur_img_idx + 1, self.img_count)
 
-    def show_bounding_box_from_annotation_file(self, file_path):
+    def show_bounding_box_from_annotation_file(self, file_path, classes_path = None):
         if self.default_save_dir is not None:
             basename = os.path.basename(os.path.splitext(file_path)[0])
             xml_path = os.path.join(self.default_save_dir, basename + XML_EXT)
@@ -1156,7 +1156,7 @@ class MainWindow(QMainWindow, WindowMixin):
             if os.path.isfile(xml_path):
                 self.load_pascal_xml_by_filename(xml_path)
             elif os.path.isfile(txt_path):
-                self.load_yolo_txt_by_filename(txt_path)
+                self.load_yolo_txt_by_filename(txt_path, classes_path)
             elif os.path.isfile(json_path):
                 self.load_create_ml_json_by_filename(json_path)
 
@@ -1166,7 +1166,7 @@ class MainWindow(QMainWindow, WindowMixin):
             if os.path.isfile(xml_path):
                 self.load_pascal_xml_by_filename(xml_path)
             elif os.path.isfile(txt_path):
-                self.load_yolo_txt_by_filename(txt_path)
+                self.load_yolo_txt_by_filename(txt_path, classes_path)
 
     def resizeEvent(self, event):
         if self.canvas and not self.image.isNull()\
@@ -1294,6 +1294,13 @@ class MainWindow(QMainWindow, WindowMixin):
                     filename = filename[0]
             self.load_create_ml_json_by_filename(filename)
 
+        if self.label_file_format == LabelFileFormat.YOLO:
+            filters = "Open Annotation yolo txt file (%s)" % ' '.join(['*.txt'])
+            filename = ustr(QFileDialog.getOpenFileName(self, '%s - Choose a yolo txt file' % __appname__, path, filters))
+            if filename:
+                if isinstance(filename, (tuple, list)):
+                    filename = filename[0]
+            self.load_yolo_txt_by_filename(filename, classes_path = self.class_path)
 
     def open_dir_dialog(self, _value=False, dir_path=None, silent=False):
         if not self.may_continue():
@@ -1333,7 +1340,7 @@ class MainWindow(QMainWindow, WindowMixin):
                 self.show_bounding_box_from_annotation_file(anno_Path)
             elif self.label_file_format == LabelFileFormat.YOLO:
                 anno_Path = p.replace(imgtype, 'txt')
-                self.show_bounding_box_from_annotation_file(anno_Path)
+                self.show_bounding_box_from_annotation_file(anno_Path, self.class_path)
             elif self.label_file_format == LabelFileFormat.CREATE_ML:
                 anno_Path = p.replace(imgtype, 'json')
                 self.show_bounding_box_from_annotation_file(anno_Path)
@@ -1651,14 +1658,14 @@ class MainWindow(QMainWindow, WindowMixin):
         self.load_labels(shapes)
         self.canvas.verified = t_voc_parse_reader.verified
 
-    def load_yolo_txt_by_filename(self, txt_path):
+    def load_yolo_txt_by_filename(self, txt_path, classes_path):
         if self.file_path is None:
             return
         if os.path.isfile(txt_path) is False:
             return
 
         self.set_format(FORMAT_YOLO)
-        t_yolo_parse_reader = YoloReader(txt_path, self.image)
+        t_yolo_parse_reader = YoloReader(txt_path, self.image, class_list_path=classes_path)
         shapes = t_yolo_parse_reader.get_shapes()
         print(shapes)
         self.load_labels(shapes)
