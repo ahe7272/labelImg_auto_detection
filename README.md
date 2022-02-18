@@ -15,7 +15,4 @@ clone this repo move to labelImg directory on CLI or Terminal and run 'python la
 ```
 python labelImg_custom.py
 ```
-
-![ex1](opendir.png)
-
-
+![opendir](https://user-images.githubusercontent.com/55167422/154652796-7a7cc482-bc58-44a7-b869-2740066d557a.PNG)
