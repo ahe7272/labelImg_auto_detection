@@ -10,12 +10,12 @@ Annotations are saved as XML files in PASCAL VOC format, YOLO and CreateML forma
 
 # Installation
 
-clone this repo move to labelImg directory on CLI or Terminal and run 'python labelImg_custom.py
+clone this repo move to labelImg directory on CLI or Terminal and run 'python labelImg_custom.py'
 
 ```
 python labelImg_custom.py
 ```
 
-
+![ex1](./readmeimgs/opendir.png)
 
 
