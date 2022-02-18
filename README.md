@@ -1,6 +1,6 @@
 # LabelImg auto detection 
 
-![ex](https://img.shields.io/pypi/v/labelimg.svg)
+![ex](https://raw.githubusercontent.com/tzutalin/labelImg/master/demo/demo3.jpg)
 
 LabelImg is a graphical image annotation tool and 'auto detection' feature is added for a ready-made weight model to detect objects automatically. You might want to check out the labelImg official github page to familiarise yourself with the original labelImg. 
 
