@@ -16,6 +16,6 @@ clone this repo move to labelImg directory on CLI or Terminal and run 'python la
 python labelImg_custom.py
 ```
 
-![ex1](./readmeimgs/opendir.png)
+![ex1](opendir.png)
 
 
