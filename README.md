@@ -15,4 +15,13 @@ clone this repo move to labelImg directory on CLI or Terminal and run 'python la
 ```
 python labelImg_custom.py
 ```
+
+1. Choose the saving annotation type(PASCAL VOC format|YOLO|CreateML formats)
+
+2. Click the open dir button highlightened in yellow. 
 ![opendir](https://user-images.githubusercontent.com/55167422/154652796-7a7cc482-bc58-44a7-b869-2740066d557a.PNG)
+
+3. it will prompt local file loading dialog three times.
+ - first dialog : image directory
+ - second dialog : model file(only works for onnx)
+ - last dialog : classes text 
