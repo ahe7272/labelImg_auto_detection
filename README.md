@@ -10,7 +10,7 @@ Annotations are saved as XML files in PASCAL VOC format, YOLO and CreateML forma
 
 # Installation
 
-clone this repo move to labelImg directory on CLI/Terminal and run 'python labelImg_custom.py'
+clone this repo and move to labelImg directory on CLI/Terminal and run 'python labelImg_custom.py'
 
 ```
 python labelImg_custom.py
@@ -21,7 +21,7 @@ python labelImg_custom.py
 2. Click the open dir button highlightened in yellow. 
 ![opendir](https://user-images.githubusercontent.com/55167422/154652796-7a7cc482-bc58-44a7-b869-2740066d557a.PNG)
 
-3. it will prompt local file loading dialogs three times.
+3. It will prompt local file loading dialogs three times.
  - first dialog : image directory
  - second dialog : model file(works for onnx only)
  - last dialog : classes list txt file(one class name per line)
