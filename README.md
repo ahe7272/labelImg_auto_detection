@@ -23,7 +23,7 @@ python labelImg_custom.py
 
 3. it will prompt local file loading dialogs three times.
  - first dialog : image directory
- - second dialog : model file(only works for onnx)
+ - second dialog : model file(works for onnx only)
  - last dialog : classes list txt file(one class name per line)
  
  4. It will create annotations files in the image directory in a chosen annotation type and load onto the tool with auto detected label bounding boxes. The rest features(edit, save, delete etc.) on labelImg are still supported for the newly detected bboxes.  
