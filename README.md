@@ -15,6 +15,7 @@ clone this repo and move to labelImg directory on CLI/Terminal and run 'python l
 ```
 python labelImg_custom.py
 ```
+# How to use
 
 1. Choose the saving annotation type(PASCAL VOC format|YOLO|CreateML formats)
 
