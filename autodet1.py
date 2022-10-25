@@ -6,12 +6,6 @@ import json
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 from libs.labelFile_custom import LabelFile
 
-def det(source, onnx, class_path):
-    net = cv2.dnn.readNet(onnx, config=None, framework=None)
-    imgformat = ['jpg', 'png', 'psd', 'tiff', 'gif', 'jpeg']
-    with open(class_path) as f:
-        classes = f.read().split('\n')
-
 def jsondet(source, onnx, class_path):
     net = cv2.dnn.readNet(onnx, config=None, framework=None)
     imgformat = ['jpg', 'png', 'psd', 'tiff', 'gif', 'jpeg']
@@ -82,12 +76,12 @@ def jsondet(source, onnx, class_path):
 
 def xmldet(source, onnx, class_path):
     net = cv2.dnn.readNet(onnx, config=None, framework=None)
+    xmlfile = LabelFile()
     imgformat = ['jpg', 'png', 'psd', 'tiff', 'gif', 'jpeg']
     with open(class_path) as f:
         classes = f.read().split('\n')
     # rubbish.txt = ['Styrofoam_Box', 'Styrofoam_Buoy', 'Styrofoam_Piece', 'PET_Bottle', 'Glass', 'Metal', 'Plastic_Buoy', 'Plastic_Buoy_China', 'Plastic_ETC', 'Net', 'Rope'] 
     # ES.txt = ['Echi', 'Star'] 
-    xmlfile = LabelFile()
 
     #### 이미지에서 나타나는 detection bbox 정보별로 shapes 리스트에 첨부하고 labelFile_custom.save_pascal_voc_format()에 해당 이미지 파일과 관련된 필수 parameter 입력후 실행
     for image in glob.glob(source):
@@ -212,4 +206,4 @@ def yolodet(source, onnx, class_path):
             shapes.append(shape)
         yolofile.save_yolo_format(filename, shapes, str(p), classes, class_path)
 
-yolodet("D:/중기청(2022)/frames/det0/*", "D:/중기청(2022)/yolov5x_esnet_640.onnx", "D:/중기청(2022)/data/classes/ES.txt")
+# yolodet("D:/중기청(2022)/frames/det0/*", "D:/중기청(2022)/yolov5x_esnet_640.onnx", "D:/중기청(2022)/data/classes/ES.txt")
